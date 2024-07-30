@@ -22,8 +22,8 @@ endif()
 set(CMAKE_PROJECT_NAME MC25LC512)
 
 # Include toolchain file
-include("../../thirdparty/STM32F103C8T/gcc-arm-none-eabi.cmake")
-set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -T \"/workspace/thirdparty/STM32F103C8T/STM32F103C8Tx_FLASH.ld\"")
+include("gcc-arm-none-eabi.cmake")
+set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -T \"/workspace/STM32F103C8Tx_FLASH.ld\"")
 
 # Enable compile command to ease indexing with e.g. clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
@@ -40,46 +40,46 @@ file(GLOB files_under_src
 )
 
 file(GLOB free_rtos_all
-     "../../thirdparty/FreeRTOS-Kernel/*.c"
+     "thirdparty/FreeRTOS-Kernel/*.c"
 )
 
 add_executable(${CMAKE_PROJECT_NAME}
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_gpio_ex.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_adc.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_adc_ex.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rcc.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rcc_ex.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_gpio.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_dma.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_cortex.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_pwr.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_flash.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_flash_ex.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_exti.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_can.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_i2c.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rtc.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rtc_ex.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_spi.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_tim.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_tim_ex.c
-    ../../thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_uart.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_gpio_ex.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_adc.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_adc_ex.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rcc.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rcc_ex.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_gpio.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_dma.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_cortex.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_pwr.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_flash.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_flash_ex.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_exti.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_can.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_i2c.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rtc.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_rtc_ex.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_spi.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_tim.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_tim_ex.c
+    thirdparty/STM32F103X_HAL/Src/stm32f1xx_hal_uart.c
     ${files_under_src}
-    ../../thirdparty/STM32F103C8T/startup_stm32f103xb.s
+    startup_stm32f103xb.s
     ${free_rtos_all}
-    ../../thirdparty/FreeRTOS-Kernel/portable/GCC/ARM_CM3/port.c
-    ../../thirdparty/FreeRTOS-Kernel/portable/MemMang/heap_3.c
+    thirdparty/FreeRTOS-Kernel/portable/GCC/ARM_CM3/port.c
+    thirdparty/FreeRTOS-Kernel/portable/MemMang/heap_3.c
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC SYSTEM
     inc
-    ../../thirdparty/STM32F103X_HAL/Inc
-    ../../thirdparty/STM32F103X_HAL/Inc/Legacy
-    ../../thirdparty/cmsis-header-stm32/stm32f1xx/Include
-    ../../thirdparty/CMSIS_5/CMSIS/Core/Include
-    ../../thirdparty/FreeRTOS-Kernel/include
-    ../../thirdparty/FreeRTOS-Kernel/portable/GCC/ARM_CM3
+    thirdparty/STM32F103X_HAL/Inc
+    thirdparty/STM32F103X_HAL/Inc/Legacy
+    thirdparty/cmsis-header-stm32/stm32f1xx/Include
+    thirdparty/CMSIS_5/CMSIS/Core/Include
+    thirdparty/FreeRTOS-Kernel/include
+    thirdparty/FreeRTOS-Kernel/portable/GCC/ARM_CM3
 )
 
 
