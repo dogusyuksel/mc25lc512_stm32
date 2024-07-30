@@ -18,6 +18,8 @@ thirdparty/*
 **/CMakeFiles/
 **/cmake_install.cmake
 **/Makefile
+MakeCache.txt
+compile_commands.json
 
 *.log
 **/cache/**
