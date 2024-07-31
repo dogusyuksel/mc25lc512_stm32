@@ -43,3 +43,7 @@ jobs:
     - name: Build Check
       run: |
         ./docker/run_docker.sh ${{ secrets.DOCKER_REPO }}:master "cd /workspace && cmake . && make && arm-none-eabi-objcopy -O binary MC25LC512.elf MC25LC512.bin"
+
+    - name: Unit Test
+      run: |
+        ./docker/run_docker.sh ${{ secrets.DOCKER_REPO }}:master "cd /workspace && ceedling clean && ceedling gcov:all utils:gcov"
