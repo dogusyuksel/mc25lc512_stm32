@@ -47,3 +47,7 @@ jobs:
     - name: Unit Test
       run: |
         ./docker/run_docker.sh ${{ secrets.DOCKER_REPO }}:master "cd /workspace && ceedling clean && ceedling gcov:all utils:gcov"
+
+    - name: Format Check
+      run: |
+        ./docker/run_docker.sh ${{ secrets.DOCKER_REPO }}:master "cd /workspace/embedded_linting && ./format_check.sh ../canbus"
